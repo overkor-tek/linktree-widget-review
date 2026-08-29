@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="cr-toolbar" content="off">
+<title>Base Command — 100X Builder</title>
+<meta name="description" content="Every door into the system, one place. Pulse, ARAYA OS, the Forges, the Build Guild.">
+<meta property="og:title" content="Base Command — 100X Builder">
+<meta property="og:description" content="Every door in, one place.">
+
+<!-- S385: THE STANDARD CHROME (the header + bottom toolbar + side toolbar Commander spent
+     weeks making presentable) — now on every builder page. Was naked (cr-toolbar=off, no
+     header/nav/bug-reporter). The side rail auto-retracts to its pull handle; pull it out for
+     shortcuts to the public attractions. Donor mold: infinity.html. -->
+<meta name="cr-header-accent" content="#2dd4e8"><meta name="cr-header-accent-deep" content="#0e7d90">
+<meta name="cr-header-label" content="100X Builder">
+<meta name="cr-header-logo" content="/assets/icons/wave1/araya-os-64.png">
+<meta name="cr-header-home" content="/">
+<meta name="cr-header-cta-text" content="Make your own"><meta name="cr-header-cta-href" content="/claim">
+<meta name="cr-header-signin-href" content="/auth.html">
+<!--
+  BASE COMMAND (S355, Commander) — the Linktree/App-Store front door.
+  The single URL both FB + IG bios point at. App-store-grade tiles → every destination.
+  Lead sources funnel here → into the OS. Mobile-first (bio-link traffic = phones).
+  ⚠️ 3 links need real URLs before the bio goes live: Discord invite · YouTube · The RIZE
+     (marked data-needs-url="1" — search the file for it).
+-->
+<style>
+  :root{
+    --bg:#0c0f16; --card:#141824; --line:rgba(255,255,255,.07); --text:#e4e8f2; --dim:#a4a4b8;
+    --teal:#0e7d90; --teal-hi:#14a0b8; --green:#7ac043;
+    --reality:#e74c3c; --creation:#f39c12; --signal:#3498db; --guardian:#2ecc71;
+    --wealth:#f1c40f; --character:#5b5ea6; --infinity:#9c27b0;
+    --discord:#5865F2; --youtube:#ff0000;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+  body{min-height:100vh;background:
+    radial-gradient(1100px 520px at 50% -8%,rgba(14,125,144,.20),transparent 60%),
+    radial-gradient(760px 420px at 88% 12%,rgba(122,192,67,.10),transparent 60%),var(--bg);}
+  .wrap{max-width:520px;margin:0 auto;padding:max(28px,env(safe-area-inset-top)) 20px 40px;}
+
+  /* ── header ── */
+  .brand{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin:14px 0 26px;}
+  .mark{order:-1;width:78px;height:78px;border-radius:22px;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 34% 28%,var(--teal-hi),#08323a);
+    box-shadow:0 12px 40px rgba(14,125,144,.45),inset 0 1px 0 rgba(255,255,255,.18);}
+  .mark svg{width:44px;height:44px;}
+  .brand h1{order:-2;margin:0 0 2px;font-size:1.72rem;font-weight:800;letter-spacing:.03em;line-height:1.15;}
+  .brand .tag{color:var(--dim);font-size:.95rem;line-height:1.5;max-width:340px;}
+  .brand .tag b{color:var(--green);font-weight:700;}
+
+  /* ── primary CTA (the OS) ── */
+  .primary{display:flex;align-items:center;gap:14px;width:100%;text-decoration:none;color:#04120a;
+    background:linear-gradient(135deg,var(--teal-hi),var(--green));border-radius:18px;padding:16px 18px;margin-bottom:22px;
+    box-shadow:0 10px 30px rgba(122,192,67,.30);transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .2s;}
+  .primary:active{transform:scale(.98);}
+  .primary .pi{width:46px;height:46px;border-radius:13px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.22);font-size:24px;}
+  .primary .pt{flex:1;min-width:0;}
+  .primary .pt b{display:block;font-size:1.12rem;font-weight:800;}
+  .primary .pt span{font-size:.82rem;opacity:.8;}
+  .primary .pa{font-size:1.4rem;opacity:.7;}
+
+  /* ── app grid ── */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .tile{display:flex;flex-direction:column;align-items:center;gap:9px;text-decoration:none;color:var(--text);
+    background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 8px 13px;
+    transition:transform .15s cubic-bezier(.34,1.56,.64,1),border-color .2s,background .2s;}
+  .tile:active{transform:scale(.94);}
+  .tile:hover{border-color:rgba(255,255,255,.2);background:#151922;}
+  .ico{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;
+    font-size:26px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 16px rgba(0,0,0,.35);}
+  .tile .lbl{font-size:.8rem;font-weight:700;letter-spacing:.01em;text-align:center;line-height:1.15;}
+  .tile[data-needs-url="1"] .ico::after{content:"";position:absolute;}
+  .tile[data-needs-url="1"]{opacity:.72;}
+  .tile[data-needs-url="1"] .lbl::after{content:" ·";color:var(--wealth);}
+
+  .section{margin:26px 0 12px;color:var(--dim);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;}
+  footer{margin-top:34px;text-align:center;color:var(--dim);font-size:.76rem;line-height:1.6;}
+  footer a{color:var(--teal-hi);text-decoration:none;}
+
+  /* ── member page (/u/) — clean, not cheesy (S380 de-cheese) ── */
+  .mark.photo{background:#0e1218 !important;overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.10) !important;}
+  .mark.photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .mark.mono{background:linear-gradient(150deg,#1e2531,#0d1017) !important;box-shadow:0 10px 34px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.10) !important;}
+  .mark.mono span{font-size:2.2rem;font-weight:800;color:#eef1f6;letter-spacing:.01em;}
+  .primary .pi svg{width:23px;height:23px;color:var(--green);}
+  .rows{display:flex;flex-direction:column;gap:10px;}
+  .lrow{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--text);
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;
+    transition:border-color .2s,background .2s,transform .1s;}
+  .lrow:active{transform:scale(.99);}
+  .lrow:hover{border-color:rgba(255,255,255,.18);background:#151922;}
+  .lrow .li{width:32px;height:32px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:var(--dim);}
+  .lrow .li svg{width:21px;height:21px;}
+  /* S391: wrap to 2 lines instead of nowrap-ellipsis — the old truncation ate the
+     content that mattered (Johnny's tip-line NUMBER cut to "(8…"). */
+  .lrow .ll{flex:1;min-width:0;font-size:.97rem;font-weight:600;line-height:1.35;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .lrow .lc{color:var(--dim);font-size:1.15rem;opacity:.45;}
+  /* S386 — mission / bio / "ways to enter" (were captured but never rendered) */
+  .ublock{margin:0 0 20px;}
+  .umission{font-size:1.02rem;line-height:1.6;color:var(--text);background:var(--card);border:1px solid var(--line);
+    border-left:3px solid var(--teal-hi);border-radius:12px;padding:14px 16px;margin-bottom:12px;white-space:pre-wrap;}
+  .ubio{color:var(--dim);font-size:.92rem;line-height:1.6;padding:0 2px;}
+  /* S469 — PREMIERE slot (Johnny's spec): the one thing being pushed right now, big, on top */
+  .premiere{margin:14px 0 4px;background:var(--card);border:1.5px solid var(--teal);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);}
+  .premiere .plabel{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.14em;color:var(--teal-hi,var(--teal));padding:12px 14px 0;text-transform:uppercase;}
+  .premiere .ptitle{font-weight:800;font-size:1.05rem;color:var(--text);padding:4px 14px 12px;line-height:1.35;}
+  .premiere .pembed{width:100%;border:0;display:block;background:#000;}
+  .premiere .pembed.video{aspect-ratio:16/9;}
+  .premiere .pimg{width:100%;display:block;max-height:340px;object-fit:cover;}
+  .premiere a.pgo{display:block;padding:12px 14px;color:var(--text);text-decoration:none;font-weight:700;border-top:1px solid var(--line);}
+  /* S469 — welcome-card tiles for link rows (extracted from pulse #modeHome .mh-tile:
+     the grid Commander picked as THE template — glow + grow on hover, works squished) */
+  .u-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:10px 0;}
+  @media(min-width:700px){.u-tiles{grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:18px;}}
+  .u-tile{min-height:120px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:5px;padding:14px;
+    color:var(--text);text-decoration:none;overflow:hidden;position:relative;
+    transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;}
+  .u-tile:hover,.u-tile:focus-visible{transform:scale(1.05);border-color:var(--teal-hi);
+    box-shadow:0 0 0 2px rgba(255,255,255,.08),0 12px 34px rgba(0,0,0,.45);outline:none;}
+  .u-tile:active{transform:scale(.96);}
+  .u-tile .ut-ico{font-size:26px;line-height:1;color:var(--teal-hi);}
+  .u-tile .ut-ico svg{display:block;width:26px;height:26px;stroke-width:1.9;}
+  .u-tile .ut-lbl{font-weight:700;font-size:15px;line-height:1.25;}
+  .u-tile .ut-sub{font-size:12.5px;color:var(--dim);line-height:1.35;}
+  .u-tile .ut-thumb{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;}
+  .u-tile.thumbed{min-height:150px;}
+  .u-tile.thumbed::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(4,6,10,.88));}
+  .u-tile.thumbed .ut-lbl,.u-tile.thumbed .ut-sub{position:relative;z-index:1;}
+  .u-tile.thumbed .ut-ico{display:none;}
+  /* S395: desktop tel: sheet — on mouse/keyboard machines a tel: click usually does
+     nothing (no dialer registered); show the number + copy instead. Phones untouched. */
+  .telback{position:fixed;inset:0;z-index:70;background:rgba(5,7,11,.72);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;padding:20px;}
+  .telsheet{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 22px;
+    max-width:340px;width:100%;text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.55);}
+  .telsheet .tlbl{color:var(--dim);font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;}
+  .telsheet .tnum{font-size:1.5rem;font-weight:800;margin:10px 0 16px;color:var(--text);}
+  .telsheet .tcopy{width:100%;border:none;border-radius:12px;min-height:48px;font-family:inherit;
+    font-weight:800;font-size:.95rem;cursor:pointer;color:#04120a;
+    background:linear-gradient(135deg,var(--teal-hi),var(--green));}
+  .telsheet .tnote{color:var(--dim);font-size:.85rem;margin-top:12px;}
+  .telsheet .tclose{background:none;border:none;color:var(--dim);font-family:inherit;font-size:.85rem;
+    margin-top:10px;cursor:pointer;text-decoration:underline;}
+  /* S395: inline "I'll help" claim — replaces the native prompt() popups */
+  .claimform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+    display:flex;flex-direction:column;gap:9px;animation:claimIn .18s ease;}
+  @keyframes claimIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:none;}}
+  .claimform input{background:#0d1017;border:1px solid var(--line);border-radius:10px;color:var(--text);
+    font-family:inherit;font-size:.95rem;padding:11px 12px;}
+  .claimform input:focus{outline:none;border-color:var(--teal-hi);}
+  .claimform button{border:none;border-radius:11px;min-height:44px;font-family:inherit;font-weight:800;
+    font-size:.92rem;cursor:pointer;color:#04120a;background:linear-gradient(135deg,var(--teal-hi),var(--green));}
+  .claimform button:disabled{opacity:.55;}
+  .claimform .cerr{color:#ff9c8f;font-size:.82rem;display:none;}
+
+  /* S391 MASTHEAD (member mode) — Commander's newsprint direction (Johnny session 7/29):
+     the name reads as a newspaper banner over the logo, the tagline as a letterspaced
+     deck line under it, the mission statement as a serif pull-quote. Two type families
+     on purpose — that contrast IS the "mainstream news print" text breakup he asked for. */
+  .brand.masthead h1{font-family:Georgia,'Times New Roman',serif;text-transform:uppercase;
+    letter-spacing:.05em;font-weight:700;font-size:1.78rem;color:#ece8de;line-height:1.12;
+    padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.16);width:100%;max-width:340px;}
+  .brand.masthead .tag.masthead-sub{font-size:.7rem;font-weight:700;letter-spacing:.38em;
+    text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:12px;}
+  .brand.masthead .tag.masthead-sub::before,.brand.masthead .tag.masthead-sub::after{
+    content:"";height:1px;width:28px;background:rgba(255,255,255,.22);flex:0 0 auto;}
+  .masthead-page .umission{font-family:Georgia,'Times New Roman',serif;font-style:italic;
+    font-size:1.12rem;line-height:1.55;color:#ded9cd;background:transparent;border:none;
+    border-left:3px solid var(--teal-hi);border-radius:0;padding:4px 0 4px 16px;}
+
+  /* ── S382 BUILDER COCKPIT — owner edit-in-place. Only the signed-in owner of
+        THIS handle ever sees these; anon/visitor render is byte-identical. ── */
+  /* S455: bottom:0 sat UNDERNEATH the ARAYA chrome dock (56px tall, z-index ~2^31)
+     — the Edit button was untappable on every phone (proven via Playwright: the dock
+     intercepted the tap). Lift the bar above the dock instead of fighting its z. */
+  #ownerBar{position:fixed;left:0;right:0;bottom:calc(56px + env(safe-area-inset-bottom));z-index:40;display:none;gap:10px;
+    align-items:center;justify-content:center;padding:12px 16px;
+    background:linear-gradient(0deg,rgba(7,9,13,.97),rgba(7,9,13,.74));backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);}
+  #ownerBar button{border:none;border-radius:13px;font-family:inherit;font-weight:800;font-size:.95rem;
+    padding:0 20px;min-height:48px;cursor:pointer;}
+  #ownerBar .edit{background:linear-gradient(135deg,var(--teal-hi),var(--green));color:#04120a;}
+  #ownerBar .copy{background:rgba(255,255,255,.09);color:var(--text);}
+  #cockpit{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;background:var(--bg);}
+  #cockpit .ck-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);
+    position:sticky;top:0;background:var(--bg);z-index:2;}
+  #cockpit .ck-head h2{margin:0;font-size:1.1rem;font-weight:800;flex:1;}
+  #cockpit .ck-close{background:rgba(255,255,255,.09);color:var(--text);border:none;border-radius:11px;
+    font-family:inherit;font-weight:700;font-size:.9rem;padding:0 16px;min-height:44px;cursor:pointer;}
+  /* S455: extra bottom padding so Save can scroll clear of the chrome dock */
+  #cockpit .ck-body{flex:1;overflow-y:auto;padding:18px 18px calc(44px + 72px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;width:100%;}
+  #cockpit .fld{margin-bottom:16px;}
+  #cockpit label{display:block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:7px;}
+  #cockpit input,#cockpit textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    color:var(--text);font-family:inherit;font-size:1rem;padding:13px 14px;box-sizing:border-box;}
+  #cockpit input:focus,#cockpit textarea:focus{outline:none;border-color:var(--teal-hi);}
+  #cockpit textarea{resize:vertical;min-height:68px;}
+  #cockpit .sec{margin:24px 0 9px;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+  .ck-row{display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap;}
+  .ck-row input{flex:1;min-width:130px;}
+  .ck-row input.price{flex:0 0 84px;min-width:0;}
+  .ck-row .rm{flex:0 0 auto;background:rgba(231,76,60,.14);color:#ff9c8f;border:1px solid rgba(231,76,60,.3);
+    border-radius:10px;font-weight:800;font-size:1.2rem;line-height:1;padding:0 15px;min-height:48px;cursor:pointer;}
+  .ck-add{background:rgba(122,192,67,.12);color:var(--green);border:1px dashed rgba(122,192,67,.42);
+    border-radius:11px;font-family:inherit;font-weight:700;font-size:.9rem;padding:11px 14px;width:100%;cursor:pointer;margin-top:4px;}
+  #cockpit .ck-save{background:linear-gradient(135deg,var(--teal-hi),var(--green));color:#04120a;border:none;
+    border-radius:13px;font-family:inherit;font-weight:800;font-size:1rem;padding:15px;width:100%;min-height:54px;
+    cursor:pointer;margin-top:22px;}
+  #cockpit .ck-save:disabled{opacity:.55;}
+  #cockpit .ck-status{text-align:center;color:var(--dim);font-size:.85rem;min-height:20px;margin-top:12px;}
+  /* narrow phones: stack each row's fields so title/price/url don't wrap into a confusing 2nd line (C7) */
+  @media(max-width:480px){
+    .ck-row{flex-direction:column;align-items:stretch;}
+    .ck-row input,.ck-row input.price{flex:1 1 auto;width:100%;min-width:0;}
+    .ck-row .rm{align-self:flex-end;min-height:42px;padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 46 34" fill="none">
+          <g><ellipse cx="16" cy="12" rx="5" ry="6.5" fill="#fff"/><circle cx="16" cy="13" r="2.6" fill="#0e7d90"/></g>
+          <g><ellipse cx="30" cy="12" rx="5" ry="6.5" fill="#fff"/><circle cx="30" cy="13" r="2.6" fill="#0e7d90"/></g>
+          <path d="M15 24 Q23 27 31 24" stroke="#7ac043" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <h1>Base Command</h1>
+      <div class="tag">Every door into the system, one place. Meet <b>ARAYA</b> — then pick your room.</div>
+    </div>
+
+    <!-- PRIMARY: the OS itself -->
+    <a class="primary" href="/my/pulse.html">
+      <span class="pi">🛰️</span>
+      <span class="pt"><b>Open ARAYA OS</b><span>Your cockpit — talk to her, run your tools</span></span>
+      <span class="pa">›</span>
+    </a>
+
+    <div class="grid">
+      <a class="tile" href="/my/pulse.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--teal-hi),#08323a)">🎛️</span>
+        <span class="lbl">Pulse</span>
+      </a>
+      <a class="tile" href="/araya-os.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--green),#3f7a1f)">🤖</span>
+        <span class="lbl">ARAYA OS</span>
+      </a>
+      <a class="tile" href="https://discord.gg/sERfR7TFcD" target="_blank" rel="noopener">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--discord),#33389c)">💬</span>
+        <span class="lbl">Discord</span>
+      </a>
+      <a class="tile" href="/builder-network.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--infinity),#5a1069)">🛠️</span>
+        <span class="lbl">Build Guild</span>
+      </a>
+      <a class="tile" href="/store/">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--wealth),#a8850a)">🛍️</span>
+        <span class="lbl">Store</span>
+      </a>
+
+      <!-- YouTube · The RIZE: hidden until real URLs exist (data-needs-url).
+           A JS pass at the bottom removes any tile whose href is still a #SET_ placeholder,
+           so Commander's page stays clean/professional and these light up when set. -->
+      <a class="tile" data-needs-url="1" href="#SET_YOUTUBE_URL">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--youtube),#a30000)">▶️</span>
+        <span class="lbl">YouTube</span>
+      </a>
+      <a class="tile" data-needs-url="1" href="#SET_RIZE_URL">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--infinity),#5a1069)">⚡</span>
+        <span class="lbl">The RIZE</span>
+      </a>
+
+      <a class="tile" href="/about.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,#39424f,#20262f)">❓</span>
+        <span class="lbl">About</span>
+      </a>
+    </div>
+
+    <div class="section">The 7 Forges</div>
+    <div class="grid">
+      <a class="tile" href="/reality.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--reality),#992018)"><img src="/images/forges/forge-icon-reality.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Reality Forge</span>
+      </a>
+      <a class="tile" href="/creation.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--creation),#a3630a)"><img src="/images/forges/forge-icon-creation.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Creation Forge</span>
+      </a>
+      <a class="tile" href="/signal.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--signal),#1c5f8f)"><img src="/images/forges/forge-icon-signal.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Signal Forge</span>
+      </a>
+      <a class="tile" href="/guardian.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--guardian),#1a8f4a)"><img src="/images/forges/forge-icon-guardian.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Guardian Forge</span>
+      </a>
+      <a class="tile" href="/wealth.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--wealth),#a8850a)"><img src="/images/forges/forge-icon-wealth.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Wealth Forge</span>
+      </a>
+      <a class="tile" href="/character.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--character),#3c3f78)"><img src="/images/forges/forge-icon-character.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Character Forge</span>
+      </a>
+      <a class="tile" href="/infinity.html">
+        <span class="ico" style="background:radial-gradient(circle at 34% 28%,var(--infinity),#5a1069)"><img src="/images/forges/forge-icon-infinity.webp" width="30" height="30" alt="" style="display:block;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))"></span>
+        <span class="lbl">Infinity Forge</span>
+      </a>
+    </div>
+
+    <!-- Visitor create path — bio-link traffic lands here; give strangers a
+         one-tap door into making their own (S357). Hidden in ?u= member mode
+         (the template swaps the footer to its own "make your own"). -->
+    <a class="primary" id="makeOwn" href="/claim" style="margin-top:22px;background:linear-gradient(135deg,#5b5ea6,#9c27b0);color:#fff;">
+      <span class="pi">✨</span>
+      <span class="pt"><b>Make your own Base Command</b><span>Answer 4 questions — your page goes live free</span></span>
+      <span class="pa">›</span>
+    </a>
+
+    <footer>
+      100X Builder · Consciousness Revolution<br>
+      <a href="/my/pulse.html">Enter the OS →</a>
+    </footer>
+
+  </div>
+
+  <script>
+  /* ══════════════════════════════════════════════════════════════
+     BASE COMMAND — THE TEMPLATE ENGINE (S357)
+     No param → Commander's curated front door (the static HTML above).
+     ?u=<handle> → the SAME enterprise template, auto-filled from that
+     builder's hub_profiles row (hub-api view). This is "the machine
+     springs one out that looks enterprise-grade" — one file, everyone's
+     door. Proven with /u/ builders (e.g. base-command.html?u=johnny-wicks).
+     ══════════════════════════════════════════════════════════════ */
+  (function(){
+    'use strict';
+    var wrap = document.querySelector('.wrap');
+
+    // 1) Clean pass: drop any tile still pointing at a #SET_ placeholder so
+    //    Commander's page never shows a dead link (professional > complete).
+    Array.prototype.forEach.call(document.querySelectorAll('.tile[data-needs-url="1"]'), function(t){
+      var h = t.getAttribute('href') || '';
+      if (h.charAt(0) === '#') t.remove();
+    });
+
+    // 2) Template mode — ?u=<handle> OR the pretty path /u/<handle> (the
+    //    _redirects rewrite is a 200, so the browser URL stays /u/<handle> and
+    //    ?u= never lands in location.search — parse the path too, like the old
+    //    landing.html did).
+    var handle = new URLSearchParams(location.search).get('u');
+    if (!handle) { var m = location.pathname.match(/\/u\/([^\/?#]+)/i); if (m) handle = decodeURIComponent(m[1]); }
+    if (!handle) return;
+
+    // S395: customer-facing profile — the builder "Fix" bug-report dock button read
+    // as a confusing dev control on a survivor-trust page (walkthrough audit). The V2
+    // dock reads window.ARAYA_SHELL_NAV as its item list (sanctioned override — pulse
+    // uses the same knob); this inline script runs before the deferred cr-frame.js
+    // loads the chrome, so member pages get cr-chrome-v2's default dock minus 'fix'.
+    // Keep in sync with the default NAV list in components/cr-chrome-v2.js.
+    window.ARAYA_SHELL_NAV = [
+      { id: 'messages', icon: '💬', label: 'Messages', href: '/my/pulse.html?open=messages' },
+      { id: 'araya',    icon: '',   label: 'hold to chat', href: '/my/pulse.html' },
+      { id: 'music',    icon: '♪',  label: 'Music',    href: '/my/pulse.html?open=music' },
+      { id: 'start',    icon: '▶',  label: 'Start',    href: '/my/pulse.html?open=mypage' }
+    ];
+
+    var esc = function(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);}); };
+    var ICONS = ['🚀','⭐','🔧','🎨','📣','💡','🛰️','🎯'];
+
+    wrap.style.opacity = '.4';
+    fetch('/.netlify/functions/hub-api?action=view&handle=' + encodeURIComponent(handle))
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(d){
+        var hub = d.hub || d;
+        if (!hub || !(hub.handle || hub.display_name)) throw new Error('empty');
+        render(hub);
+      })
+      .catch(function(){
+        wrap.style.opacity = '1';
+        wrap.querySelector('.brand h1').textContent = 'Not found';
+        wrap.querySelector('.brand .tag').innerHTML = 'No base command at that handle yet. <a href="/join" style="color:var(--teal-hi)">Make yours →</a>';
+      });
+
+    function render(hub){
+      var name = hub.display_name || hub.handle;
+      document.title = name + ' — 100X Builder';
+      wrap.querySelector('.brand h1').textContent = name;
+      var tagText = hub.tagline || (hub.mission && hub.mission.statement) || hub.bio || '';
+      var tagEl = wrap.querySelector('.brand .tag');
+      tagEl.innerHTML = esc(tagText);
+
+      // S391 masthead — every member page gets the newsprint banner treatment. The
+      // letterspaced deck line only fits a SHORT tagline ("Media Group"); a full
+      // sentence stays in the normal quiet style.
+      wrap.querySelector('.brand').classList.add('masthead');
+      document.body.classList.add('masthead-page');
+      if (tagText && tagText.length <= 28 && tagText.split(/\s+/).length <= 3) tagEl.classList.add('masthead-sub');
+
+      // S386 — brand is ONE provisioned variable: honor the builder's forge so the
+      // whole page renders in THEIR accent, not the hardcoded default teal.
+      var FORGE={reality:['#e74c3c','#ff6b5c'],creation:['#f39c12','#ffb443'],signal:['#3498db','#5db4ff'],guardian:['#2ecc71','#4dffa0'],wealth:['#f1c40f','#ffe14d'],character:['#5b5ea6','#8b8fd6'],infinity:['#9c27b0','#c44dff']};
+      var fc=FORGE[(hub.forge||'').toLowerCase()];
+      if(fc){ var rs=document.documentElement.style; rs.setProperty('--teal',fc[0]); rs.setProperty('--teal-hi',fc[1]); }
+
+      // clean monochrome line icons — NO emoji (S380 de-cheese)
+      var ICON = {
+        globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>',
+        play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 9.5l4.2 2.5L11 14.5z" fill="currentColor" stroke="none"/></svg>',
+        chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a7.5 7.5 0 0 1-10.9 6.7L4 20l1.8-5A7.5 7.5 0 1 1 21 11.5z"/></svg>',
+        camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>',
+        tag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20.5 13l-7.5 7.5L4 11.5V4h7.5z"/><circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"/></svg>',
+        spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6.5 6.5l3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/></svg>',
+        link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3A4 4 0 1 0 13 5.3l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 1 0 11 18.7l1-1"/></svg>'
+      };
+      var SOC = {website:'globe',youtube:'play',discord:'chat',instagram:'camera',facebook:'link',x:'link',twitter:'link',tiktok:'play',linkedin:'link'};
+
+      // Avatar: their logo if set, else a clean monogram — never the ARAYA blob.
+      var mark = wrap.querySelector('.mark');
+      if (mark) {
+        if (hub.avatar_url) { mark.className = 'mark photo'; mark.innerHTML = '<img src="'+esc(hub.avatar_url)+'" alt="'+esc(name)+'">'; }
+        else { mark.className = 'mark mono'; mark.innerHTML = '<span>'+esc((name||'?').trim().charAt(0).toUpperCase())+'</span>'; }
+      }
+
+      // members see ONLY their stuff — hide platform sections + the visitor CTA
+      Array.prototype.forEach.call(wrap.querySelectorAll('.section'), function(s){ s.style.display = 'none'; });
+      var mkOwn = document.getElementById('makeOwn'); if (mkOwn) mkOwn.style.display = 'none';
+      var grids = wrap.querySelectorAll('.grid');
+      for (var i = 1; i < grids.length; i++) grids[i].style.display = 'none';
+
+      // S469 — PREMIERE (Johnny's spec, WO-johnny-store-tenant2): the ONE thing the
+      // builder is pushing right now, rendered big at the top Linktree-style.
+      // YouTube/Spotify links play right on the page; anything else gets a big card.
+      var prem = hub.premiere;
+      if (prem && prem.url) {
+        var pembed = '';
+        var yt = String(prem.url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?[^#\s]*v=|shorts\/|embed\/|live\/))([A-Za-z0-9_-]{6,20})/);
+        var sp = String(prem.url).match(/open\.spotify\.com\/(track|album|playlist|artist|episode|show)\/([A-Za-z0-9]+)/);
+        if (yt) pembed = '<iframe class="pembed video" src="https://www.youtube-nocookie.com/embed/'+yt[1]+'" title="premiere" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+        else if (sp) pembed = '<iframe class="pembed" style="height:'+(sp[1]==='track'?'152':'352')+'px" src="https://open.spotify.com/embed/'+sp[1]+'/'+sp[2]+'" title="premiere" allow="encrypted-media" loading="lazy"></iframe>';
+        else if (prem.image) pembed = '<img class="pimg" src="'+esc(prem.image)+'" alt="" loading="lazy">';
+        var pdiv = document.createElement('div');
+        pdiv.className = 'premiere';
+        pdiv.innerHTML = '<div class="plabel">Premiere</div>'
+          + (prem.title ? '<div class="ptitle">'+esc(prem.title)+'</div>' : '')
+          + pembed
+          + '<a class="pgo" href="'+esc(prem.url)+'" target="_blank" rel="noopener">Open →</a>';
+        var premAnchor = wrap.querySelector('.primary');
+        if (premAnchor && premAnchor.parentNode) premAnchor.parentNode.insertBefore(pdiv, premAnchor);
+      }
+
+      // primary CTA → first sellable, else their work — refined (not candy-gradient)
+      var primary = wrap.querySelector('.primary');
+      var sells = Array.isArray(hub.sells) ? hub.sells.filter(function(s){return s && s.title;}) : [];
+      var heroSell = null; // the sell auto-promoted to the hero CTA — skip it in the link list (S386 de-dupe)
+      // S387 (Commander: "buttons are super lame — need futuristic"): the hero renders
+      // in the builder's OWN forge accent (set at :318) with a glow, not flat gray.
+      primary.style.background = 'linear-gradient(135deg,var(--teal),var(--teal-hi))';
+      primary.style.color = '#fff';
+      primary.style.border = '1px solid rgba(255,255,255,.20)';
+      primary.style.boxShadow = '0 12px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.28)';
+      primary.querySelector('.pi').style.background = 'rgba(255,255,255,.22)';
+      primary.querySelector('.pa').style.color = 'rgba(255,255,255,.85)';
+      if (sells.length && (sells[0].url || sells[0].stripe_price_id)) {
+        heroSell = sells[0];
+        primary.querySelector('.pt b').textContent = sells[0].title;
+        primary.querySelector('.pt span').textContent = sells[0].price ? ('' + sells[0].price) : 'See what I offer';
+        // S455 — the hero sell shows its uploaded product photo, not a generic tag icon.
+        if (sells[0].image) {
+          primary.querySelector('.pi').innerHTML = '<img src="'+esc(sells[0].image)+'" alt="" style="width:100%;height:100%;border-radius:13px;object-fit:cover">';
+        } else {
+          primary.querySelector('.pi').innerHTML = ICON.tag;
+        }
+        // S455 HUMAN BRIDGE — a sell with a saved Stripe price id gets a REAL buy
+        // door (create-checkout), not just a link. Buy wins over a plain url.
+        if (sells[0].stripe_price_id) {
+          primary.href = '#buy';
+          primary.classList.add('buybtn');
+          primary.setAttribute('data-price', sells[0].stripe_price_id);
+          primary.querySelector('.pt span').textContent = (sells[0].price ? sells[0].price + ' · ' : '') + 'Buy now';
+        } else {
+          primary.href = sells[0].url;
+        }
+      } else {
+        // No sellable with a URL — DON'T self-link to /u/<handle> (that reloads
+        // this same page and flashes the default cockpit → the "flipping between
+        // two pages" loop Johnny hit). Scroll to their links instead.
+        primary.href = '#builder-links';
+        primary.addEventListener('click', function(e){
+          e.preventDefault();
+          var g = wrap.querySelector('.rows') || wrap.querySelector('.grid');
+          if (g) g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        primary.querySelector('.pt b').textContent = 'See my work';
+        primary.querySelector('.pt span').textContent = 'Everything I\'m building';
+        primary.querySelector('.pi').innerHTML = ICON.spark;
+      }
+
+      // clean stacked rows (Linktree-grade) — no emoji, no rainbow gradients
+      var grid = wrap.querySelector('.grid');
+      // S387 (Commander: the rows all wore the same 'spark' icon — read like spinners).
+      // Pick an icon from the destination so a song reads ▶, a community 💬, a tip line ☎.
+      function pickIcon(url, label){
+        var u=(url||'').toLowerCase(), l=(label||'').toLowerCase(), s=u+' '+l;
+        if(/^tel:|^sms:|tip line|hotline|call /.test(s)) return 'chat';
+        if(/song|listen|music|spotify|youtu|\.mp3|watch/.test(s)) return 'play';
+        if(/communit|discord|forum|group|bearing witness/.test(s)) return 'chat';
+        if(/^https?:/.test(u)) return 'globe';
+        return 'link';
+      }
+      // S455 HUMAN BRIDGE — sells rows render their photo (if uploaded) and, when a
+      // Stripe price id is saved, a real Buy button wired to create-checkout.
+      function sellRow(s){
+        var media = s.image
+          ? '<img src="'+esc(s.image)+'" alt="" style="width:44px;height:44px;border-radius:10px;object-fit:cover;flex:0 0 auto">'
+          : '<span class="li">'+ICON.tag+'</span>';
+        var label = '<span class="ll">'+esc(s.title)+(s.price?' · '+esc(s.price):'')+'</span>';
+        if (s.stripe_price_id) {
+          return '<div class="lrow" style="cursor:default">'+media+label+
+            '<button type="button" class="buybtn" data-price="'+esc(s.stripe_price_id)+'"'+
+            ' style="flex:0 0 auto;border:none;border-radius:10px;min-height:40px;padding:0 18px;font-family:inherit;font-weight:800;font-size:.9rem;cursor:pointer;color:#04120a;background:linear-gradient(135deg,var(--teal-hi),var(--green))">Buy</button></div>';
+        }
+        if (s.url) return '<a class="lrow" href="'+esc(s.url)+'" target="_blank" rel="noopener">'+media+label+'<span class="lc">›</span></a>';
+        return '<div class="lrow" style="cursor:default">'+media+label+'</div>';
+      }
+      // S469 — link rows render as welcome-style TILES (the template Commander picked);
+      // sells stay as clean listing rows below (store-normal). Thumbnailed links become
+      // image cards — the Linktree half of "this page had a baby with Linktree".
+      function tile(href, label, sub, icon, ext, img){
+        var media = img ? '<img class="ut-thumb" src="'+esc(img)+'" alt="" loading="lazy">' : '';
+        var inner = media
+          + '<span class="ut-ico">'+(ICON[icon]||ICON.link)+'</span>'
+          + '<span class="ut-lbl">'+esc(label)+'</span>'
+          + (sub ? '<span class="ut-sub">'+esc(sub)+'</span>' : '');
+        var cls = 'u-tile'+(img?' thumbed':'');
+        if (!href) return '<div class="'+cls+'" style="cursor:default">'+inner+'</div>';
+        return '<a class="'+cls+'" href="'+esc(href)+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+inner+'</a>';
+      }
+      // S384: builders with their OWN native community (comms-unity) don't need
+      // the generic platform Discord fallback too — that's just noise once they
+      // have a real destination.
+      var hasOwnCommunity = (hub.building||[]).concat(sells).some(function(item){
+        return item && ((item.title && /community/i.test(item.title)) || (item.url && /comms-unity/i.test(item.url)));
+      });
+      var tiles = [];
+      (hub.building||[]).forEach(function(b){ if(b&&b.title) tiles.push(tile(b.url||'', b.title, b.note||'', pickIcon(b.url,b.title), !!b.url, b.image||'')); });
+      var soc = hub.socials || {};
+      Object.keys(soc).forEach(function(k){ var u=soc[k]; if(u && /^https?:/i.test(u)) tiles.push(tile(u, k.charAt(0).toUpperCase()+k.slice(1), '', SOC[k.toLowerCase()]||'link', true)); });
+      if (!hasOwnCommunity) {
+        tiles.push(tile('https://discord.gg/sERfR7TFcD','Join the community','','chat',true));
+      }
+      grid.className = 'u-tiles';
+      grid.innerHTML = tiles.join('');
+      // the listing (non-hero sells) — clean rows under the card grid
+      var sellList = sells.filter(function(s){ return s!==heroSell; });
+      if (sellList.length){
+        var srows = document.createElement('div'); srows.className = 'rows';
+        srows.innerHTML = sellList.map(sellRow).join('');
+        grid.parentNode.insertBefore(srows, grid.nextSibling);
+      }
+
+      // S386 — render 100% of the row. mission.statement, bio, and doors[] were all
+      // captured in hub_profiles but silently dropped by the template (both audits).
+      var extra = [];
+      var missionText = (hub.mission && (hub.mission.statement || hub.mission.goal)) || '';
+      if (missionText && missionText !== tagText) extra.push('<div class="umission">'+esc(missionText)+'</div>');
+      if (hub.bio && hub.bio !== tagText && hub.bio !== missionText) extra.push('<div class="ubio">'+esc(hub.bio)+'</div>');
+      if (extra.length) {
+        var mb = document.createElement('div'); mb.className = 'ublock'; mb.innerHTML = extra.join('');
+        grid.parentNode.insertBefore(mb, grid); // above the links — the "why" before the "what"
+      }
+
+      // "Ways to enter" — the doors[] linktree (e.g. Stay / Host / Film / Build / Partner).
+      var doors = Array.isArray(hub.doors) ? hub.doors.filter(function(d){ return d && (d.label || d.title); }) : [];
+      if (doors.length) {
+        var dsec = document.createElement('div'); dsec.className = 'section'; dsec.style.display = ''; dsec.textContent = 'Ways to enter';
+        var drows = document.createElement('div'); drows.className = 'u-tiles';
+        drows.innerHTML = doors.map(function(d){
+          var label = d.label || d.title;
+          return tile(d.url || '', label, d.subtitle || '', pickIcon(d.url, label), !!d.url, d.image || '');
+        }).join('');
+        grid.parentNode.insertBefore(dsec, grid.nextSibling);
+        grid.parentNode.insertBefore(drows, dsec.nextSibling);
+      }
+
+      // S387 — "Ways to help": a real claimable mission task board (needs[]).
+      // Same row visual language as doors/links, plus a tiny inline claim step.
+      var needs = Array.isArray(hub.needs) ? hub.needs.filter(function(n){ return n && n.title; }) : [];
+      if (needs.length) {
+        var nsec = document.createElement('div'); nsec.className = 'section'; nsec.style.display = ''; nsec.textContent = 'Ways to help';
+        // C3 REVIEW (S387): a one-line expectation-setter, cheap, real trust value for an
+        // audience primed to read silence as being disbelieved or ignored.
+        var nnote = document.createElement('div'); nnote.className = 'ubio'; nnote.style.margin = '0 0 12px'; nnote.style.fontSize = '.82rem';
+        nnote.textContent = 'I read these myself — sometimes I\'m on the road, so give me a few days.';
+        var nrows = document.createElement('div'); nrows.className = 'rows';
+        needs.forEach(function(n, i){
+          // C4 REVIEW (S387): the public API now returns claimed:true/false, never the
+          // claimer's contact info — that stays server-side, visible only to the owner.
+          var claimed = !!n.claimed;
+          // C7 REVIEW (S387): the "doors" rows one section up are real <a> tags — reachable
+          // by keyboard, announced by screen readers. These were plain <div>s with only a
+          // click handler, invisible to both. Match the pattern the rest of the page already sets.
+          var r = document.createElement('div'); r.className = 'lrow';
+          r.style.cursor = claimed ? 'default' : 'pointer';
+          if (!claimed) { r.setAttribute('role', 'button'); r.setAttribute('tabindex', '0'); }
+          r.innerHTML = '<span class="li">'+ICON.spark+'</span>'+
+            '<span class="ll">'+esc(n.title)+(n.note?' — '+esc(n.note):'')+'</span>'+
+            '<span class="lc" style="opacity:1;font-size:.8rem;font-weight:700;color:'+(claimed?'var(--dim)':'var(--green)')+'">'+(claimed?'Claimed ✓':'I\'ll help ›')+'</span>';
+          if (!claimed) {
+            r.addEventListener('keydown', function(e){
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); r.click(); }
+            });
+            // S395: the native prompt() pair read like a scam popup on a survivor-trust
+            // page and left no visible done-state (walkthrough audit). Inline expand
+            // instead: tap → name + contact + confirm slide open under the card; success
+            // flips the card itself to a done state. Same claim-need API call as before,
+            // and the C3 S387 rule still holds: never promise contact that didn't happen.
+            var form = null;
+            // S395b: full display name, not the first word — a BRAND host like
+            // "We Expose Monsters" was reading as "so We can reach you".
+            var who = String(hub.display_name || '').trim() || 'they';
+            var BTN_LABEL = 'I\'m in — count me for this';
+            r.addEventListener('click', function(){
+              if (r.getAttribute('data-done')) return;
+              if (form) { form.remove(); form = null; return; }   // second tap folds it away
+              form = document.createElement('div');
+              form.className = 'claimform';
+              form.innerHTML =
+                '<input type="text" placeholder="Your name">'+
+                '<input type="text" placeholder="Phone or email — so '+esc(who)+' can reach you">'+
+                '<button type="button">'+BTN_LABEL+'</button>'+
+                '<div class="cerr"></div>';
+              var inps = form.querySelectorAll('input');
+              var btn = form.querySelector('button');
+              var err = form.querySelector('.cerr');
+              function fail(msg){
+                btn.disabled = false; btn.textContent = BTN_LABEL;
+                err.textContent = msg; err.style.display = 'block';
+              }
+              function submit(){
+                var nm = inps[0].value.trim(), ct = inps[1].value.trim();
+                err.style.display = 'none';
+                if (!nm) { inps[0].focus(); return; }
+                if (!ct) { inps[1].focus(); return; }
+                btn.disabled = true; btn.textContent = 'Sending…';
+                fetch('/.netlify/functions/hub-api?action=claim-need', {
+                  method:'POST', headers:{'Content-Type':'application/json'},
+                  body: JSON.stringify({ handle: hub.handle, id: n.id, name: nm, contact: ct })
+                }).then(function(res){ return res.json().then(function(d){ return {ok:res.ok, d:d}; }); })
+                  .then(function(x){
+                    if (!x.ok) { fail((x.d && x.d.error) || 'Could not claim that — try again.'); return; }
+                    if (form) { form.remove(); form = null; }
+                    r.setAttribute('data-done', '1');
+                    r.style.cursor = 'default';
+                    r.removeAttribute('role'); r.removeAttribute('tabindex');
+                    r.querySelector('.li').style.color = 'var(--green)';
+                    r.querySelector('.ll').textContent = '✓ You\'re in — this goes straight to ' + who + '.'
+                      + (x.d && x.d.notified ? '' : ' If you don\'t hear back in a few days, try the tip line directly.');
+                    r.querySelector('.lc').textContent = '';
+                  }).catch(function(){ fail('Network error — try again.'); });
+              }
+              btn.addEventListener('click', submit);
+              inps[1].addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
+              r.insertAdjacentElement('afterend', form);
+              inps[0].focus();
+            });
+          }
+          nrows.appendChild(r);
+        });
+        var afterNode = (typeof drows !== 'undefined' && drows) ? drows.nextSibling : grid.nextSibling;
+        grid.parentNode.insertBefore(nsec, afterNode);
+        grid.parentNode.insertBefore(nnote, nsec.nextSibling);
+        grid.parentNode.insertBefore(nrows, nnote.nextSibling);
+      }
+
+      wrap.querySelector('footer').innerHTML =
+        'Built with <b style="color:var(--green)">ARAYA</b> on 100X Builder<br>'+
+        '<a href="/claim">Make your own →</a>';
+
+      // S455 HUMAN BRIDGE — the Buy door. One delegated handler covers the hero CTA
+      // and every sell row. POSTs the saved price id to create-checkout (which
+      // re-verifies it server-side against saved sells rows) → Stripe Checkout.
+      // Action-Reaction: failure is LOUD (inline alert with the server's reason).
+      wrap.addEventListener('click', function(e){
+        var b = e.target.closest ? e.target.closest('.buybtn') : null;
+        if (!b) return;
+        e.preventDefault();
+        if (b.getAttribute('data-busy')) return;
+        b.setAttribute('data-busy', '1');
+        var isBtn = b.tagName === 'BUTTON';
+        var labelEl = isBtn ? b : b.querySelector('.pt b');
+        var orig = labelEl.textContent;
+        labelEl.textContent = 'Opening checkout…';
+        fetch('/.netlify/functions/create-checkout', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            priceId: b.getAttribute('data-price'),
+            productSlug: 'hub-' + hub.handle,
+            successUrl: location.origin + '/u/' + hub.handle + '?bought=1',
+            cancelUrl: location.origin + '/u/' + hub.handle
+          })
+        })
+        .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+        .then(function(x){
+          var url = x.d && x.d.url;
+          if (x.ok && url) { location.href = url; return; }
+          b.removeAttribute('data-busy'); labelEl.textContent = orig;
+          alert((x.d && x.d.error) || 'Checkout could not start — try again in a minute.');
+        })
+        .catch(function(){
+          b.removeAttribute('data-busy'); labelEl.textContent = orig;
+          alert('Network error — checkout could not start. Try again.');
+        });
+      });
+
+      // S455 — coming back from a completed checkout (?bought=1): say so, loudly.
+      if (new URLSearchParams(location.search).get('bought') === '1') {
+        var ok = document.createElement('div');
+        ok.style.cssText = 'background:rgba(122,192,67,.14);border:1px solid rgba(122,192,67,.45);color:var(--green);border-radius:12px;padding:13px 16px;margin:0 0 16px;font-weight:700;text-align:center;';
+        ok.textContent = '✓ Payment received — thank you!';
+        wrap.insertBefore(ok, wrap.firstChild);
+      }
+
+      // S395: desktop tel: dead-click fix — on mouse/keyboard machines a tel: click
+      // usually does nothing (no dialer registered), so 5 of Johnny's rows were dead
+      // on desktop (walkthrough audit). Non-touch viewers get a small sheet: the number
+      // large, Copy, and "dial it from your phone". Touch devices keep the native
+      // dialer untouched. Generic: the number comes from the clicked row's own href.
+      wrap.addEventListener('click', function(e){
+        var a = e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
+        if (!a) return;
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; // touch → dialer
+        e.preventDefault();
+        var raw = decodeURIComponent((a.getAttribute('href') || '').replace(/^tel:/i, ''));
+        var digits = raw.replace(/[^\d]/g, '');
+        var mm = digits.match(/^1?(\d{3})(\d{3})(\d{4})$/);
+        var pretty = mm ? '(' + mm[1] + ') ' + mm[2] + '-' + mm[3] : raw;
+        var back = document.createElement('div');
+        back.className = 'telback';
+        back.innerHTML = '<div class="telsheet" role="dialog" aria-label="Phone number">'+
+          '<div class="tlbl">Call or text</div>'+
+          '<div class="tnum">'+esc(pretty)+'</div>'+
+          '<button type="button" class="tcopy">Copy number</button>'+
+          '<div class="tnote">or dial it from your phone</div>'+
+          '<button type="button" class="tclose">Close</button></div>';
+        function closeSheet(){ back.remove(); document.removeEventListener('keydown', onKey); }
+        function onKey(ev){ if (ev.key === 'Escape') closeSheet(); }
+        back.addEventListener('click', function(ev){ if (ev.target === back) closeSheet(); });
+        back.querySelector('.tclose').addEventListener('click', closeSheet);
+        var cp = back.querySelector('.tcopy');
+        cp.addEventListener('click', function(){
+          var done = function(){ cp.textContent = 'Copied ✓'; setTimeout(function(){ cp.textContent = 'Copy number'; }, 1500); };
+          try {
+            if (navigator.clipboard) navigator.clipboard.writeText(raw).then(done, function(){ cp.textContent = raw; });
+            else cp.textContent = raw;
+          } catch (err) { cp.textContent = raw; }
+        });
+        document.addEventListener('keydown', onKey);
+        document.body.appendChild(back);
+      });
+      wrap.style.opacity = '1';
+    }
+  })();
+  </script>
+
+  <!-- ══ BUILDER COCKPIT (S382) — owner-only overlays; hidden until JS confirms
+       the signed-in viewer OWNS this handle. Anon/visitor never see them. ══ -->
+  <div id="ownerBar">
+    <button class="copy" id="obCopy">Copy link</button>
+    <button class="edit" id="obEdit">✎ Edit my page</button>
+  </div>
+  <div id="cockpit">
+    <div class="ck-head">
+      <button class="ck-close" id="ckClose">‹ Back</button>
+      <h2>Edit your page</h2>
+    </div>
+    <div class="ck-body">
+      <div class="fld"><label>Photo or logo</label>
+        <input id="ckAvatar" placeholder="https://…  (square image — it's also your share picture)">
+        <button type="button" class="ck-add" id="ckAvatarUp" style="margin-top:8px">📷 Upload photo from this phone</button></div>
+      <div class="fld"><label>Name</label>
+        <input id="ckName" placeholder="Your name or brand"></div>
+      <div class="fld"><label>One-line bio — what's happening NOW</label>
+        <textarea id="ckTag" placeholder="Who you are + what's live right now"></textarea></div>
+      <div class="fld"><label>Mission (optional)</label>
+        <input id="ckMission" placeholder="What you're working toward"></div>
+
+      <div class="sec">Premiere — the ONE thing you're pushing right now</div>
+      <div class="fld"><label>Title</label>
+        <input id="ckPremTitle" placeholder="New video, song, or announcement"></div>
+      <div class="fld"><label>Link (YouTube / Spotify links play right on your page)</label>
+        <input id="ckPremUrl" placeholder="https://…  (clear this to remove the premiere)"></div>
+
+      <div class="sec">What I sell</div>
+      <div id="ckSells"></div>
+      <button class="ck-add" data-add="sells">+ Add something you sell</button>
+
+      <div class="sec">What I'm building / links</div>
+      <div id="ckBuilding"></div>
+      <button class="ck-add" data-add="building">+ Add a link</button>
+
+      <div class="sec">Where to find me</div>
+      <div id="ckSocials"></div>
+      <button class="ck-add" data-add="socials">+ Add a social link</button>
+
+      <button class="ck-save" id="ckSave">Save — my page goes live</button>
+      <div class="ck-status" id="ckStatus"></div>
+    </div>
+  </div>
+
+  <script src="/components/auth.js"></script>
+  <script>
+  /* ══════════════════════════════════════════════════════════════
+     BUILDER COCKPIT (S382) — edit-in-place for the page's OWNER.
+     The public render above is byte-identical for the world. When the
+     SIGNED-IN owner of THIS handle views it, they get an Edit bar → a
+     structured editor → save to hub-api action=save → reload the fresh
+     clean view. ONE URL, two modes (Linktree's model). Backend untouched:
+     action=save already owns every field, JWT-gated (identity from token).
+     ══════════════════════════════════════════════════════════════ */
+  (function(){
+    'use strict';
+    // Same handle parse as the render script above.
+    var handle = new URLSearchParams(location.search).get('u');
+    if (!handle) { var m = location.pathname.match(/\/u\/([^\/?#]+)/i); if (m) handle = decodeURIComponent(m[1]); }
+    if (!handle) return;              // Commander front door / no member page → nothing to edit
+    if (!window.Auth) return;         // auth.js failed → leave the public page alone
+
+    var API = '/.netlify/functions/hub-api';
+    var HUB = null;
+    var SELL_COLS  = [{k:'title',ph:'What you sell'},{k:'price',ph:'$',cls:'price'},{k:'url',ph:'link (https://…)'},
+      // S455 HUMAN BRIDGE — optional real-checkout wire. Human words, no jargon walls.
+      {k:'stripe_price_id',ph:'Stripe price ID (from your Stripe dashboard) — leave blank for a plain link'}];
+    var BUILD_COLS = [{k:'title',ph:'Name'},{k:'url',ph:'link (https://…)'}];
+    var SOC_COLS   = [{k:'k',ph:'platform (instagram…)'},{k:'u',ph:'https://…'}];
+
+    Auth.init().then(function(){
+      if (!Auth.isSignedIn()) return;                     // anon sees the pure public page
+      return fetch(API + '?action=mine', { headers:{ Authorization:'Bearer ' + Auth.getAccessToken() } })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(d){
+          if (!d || !d.hub || d.hub.handle !== handle) return;   // signed in, but not MY page
+          HUB = d.hub;
+          mountBar();
+        });
+    }).catch(function(){ /* never break the public page over the owner layer */ });
+
+    function id(x){ return document.getElementById(x); }
+
+    function mountBar(){
+      id('ownerBar').style.display = 'flex';
+      document.body.style.paddingBottom = '150px';        // clear the fixed bar + chrome dock (S455)
+      id('obEdit').onclick = openCockpit;
+      id('obCopy').onclick = function(){
+        var link = location.origin + '/u/' + HUB.handle, btn = id('obCopy');
+        var done = function(){ flash(btn, 'Copied ✓'); };
+        try {
+          if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, function(){ flash(btn, link); });
+          else flash(btn, link);
+        } catch(e){ flash(btn, link); }
+      };
+      id('ckClose').onclick = function(){ id('cockpit').style.display = 'none'; };
+      id('ckSave').onclick = save;
+      // S455 — avatar photo upload (phone camera roll → hosted URL → the field).
+      id('ckAvatarUp').onclick = function(){
+        var btn = id('ckAvatarUp'), o = '📷 Upload photo from this phone';
+        pickPhoto({
+          onStart: function(){ btn.disabled = true; btn.textContent = 'Uploading…'; },
+          onDone: function(url){ id('ckAvatar').value = url; btn.disabled = false;
+            btn.textContent = '✓ Uploaded — hit Save to make it live'; setTimeout(function(){ btn.textContent = o; }, 3000); },
+          onFail: function(msg){ btn.disabled = false; btn.textContent = o;
+            id('ckStatus').textContent = msg; alert(msg); }
+        });
+      };
+      document.querySelectorAll('.ck-add').forEach(function(b){
+        b.onclick = function(){
+          var t = b.getAttribute('data-add');
+          if (t === 'sells')    addRow('ckSells', SELL_COLS, null);
+          if (t === 'building') addRow('ckBuilding', BUILD_COLS, null);
+          if (t === 'socials')  addRow('ckSocials', SOC_COLS, null);
+        };
+      });
+    }
+
+    function flash(btn, msg){ var o = btn.textContent; btn.textContent = msg; setTimeout(function(){ btn.textContent = o; }, 1500); }
+
+    // ── S455 HUMAN BRIDGE — phone-native photo upload on the existing public
+    // file-upload rail (Netlify Blobs). Opens the picker/camera, base64-POSTs,
+    // hands back the hosted URL. Every failure is LOUD (status line + alert).
+    // Busy-state starts only once a file is actually chosen, so canceling the
+    // picker never wedges a button in "Uploading…".
+    function pickPhoto(cb){
+      var fi = document.createElement('input');
+      fi.type = 'file'; fi.accept = 'image/*';
+      fi.onchange = function(){
+        var f = fi.files && fi.files[0];
+        if (!f) return;
+        if (f.size > 4 * 1024 * 1024) { cb.onFail('That photo is over 4 MB — pick a smaller one.'); return; }
+        if (cb.onStart) cb.onStart();
+        var rd = new FileReader();
+        rd.onload = function(){
+          fetch('/.netlify/functions/file-upload', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: f.name, data: String(rd.result).split(',')[1],
+              contentType: f.type || 'image/jpeg', uploadedBy: 'cockpit:' + handle })
+          })
+          .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+          .then(function(x){
+            if (x.ok && x.d && x.d.url) cb.onDone(x.d.url);
+            else cb.onFail((x.d && (x.d.error || x.d.details)) || 'Upload failed — try again.');
+          })
+          .catch(function(){ cb.onFail('Network error — upload failed.'); });
+        };
+        rd.onerror = function(){ cb.onFail('Could not read that file.'); };
+        rd.readAsDataURL(f);
+      };
+      fi.click();
+    }
+
+    function openCockpit(){
+      id('ckAvatar').value  = HUB.avatar_url || '';
+      id('ckName').value    = HUB.display_name || '';
+      id('ckTag').value     = HUB.tagline || '';
+      id('ckMission').value = (HUB.mission && (HUB.mission.statement || HUB.mission.goal)) || '';
+      id('ckPremTitle').value = (HUB.premiere && HUB.premiere.title) || '';
+      id('ckPremUrl').value   = (HUB.premiere && HUB.premiere.url) || '';
+      fillRows('ckSells', SELL_COLS, HUB.sells || []);
+      fillRows('ckBuilding', BUILD_COLS, HUB.building || []);
+      var soc = Object.keys(HUB.socials || {}).map(function(k){ return { k:k, u:HUB.socials[k] }; });
+      fillRows('ckSocials', SOC_COLS, soc);
+      id('ckStatus').textContent = '';
+      id('ckSave').disabled = false;
+      id('cockpit').style.display = 'flex';
+      id('cockpit').scrollTop = 0;
+    }
+
+    function fillRows(host, cols, items){ id(host).innerHTML = ''; items.forEach(function(it){ addRow(host, cols, it); }); }
+    function addRow(host, cols, it){
+      var row = document.createElement('div'); row.className = 'ck-row';
+      row.__orig = it || null;          // keep the full original row so save() preserves hidden fields (image/kind/note)
+      cols.forEach(function(c){
+        var inp = document.createElement('input');
+        inp.placeholder = c.ph; inp.setAttribute('data-c', c.k);
+        if (c.cls) inp.className = c.cls;
+        inp.value = (it && it[c.k] != null) ? it[c.k] : '';
+        row.appendChild(inp);
+      });
+      // S455 — sells rows get a product-photo upload button; the hosted URL rides
+      // the row's hidden `image` field (preserved via row.__orig) into save().
+      if (host === 'ckSells') {
+        var up = document.createElement('button');
+        up.type = 'button';
+        up.style.cssText = 'flex:0 0 auto;background:rgba(122,192,67,.12);color:var(--green);border:1px dashed rgba(122,192,67,.42);border-radius:10px;font-family:inherit;font-weight:700;font-size:.85rem;padding:0 12px;min-height:48px;cursor:pointer;';
+        up.textContent = (it && it.image) ? '🖼 Photo ✓' : '📷 Photo';
+        up.onclick = function(){
+          pickPhoto({
+            onStart: function(){ up.disabled = true; up.textContent = 'Uploading…'; },
+            onDone: function(url){ row.__orig = Object.assign({}, row.__orig || {}, { image: url });
+              up.disabled = false; up.textContent = '🖼 Photo ✓'; },
+            onFail: function(msg){ up.disabled = false; up.textContent = '📷 Photo';
+              id('ckStatus').textContent = msg; alert(msg); }
+          });
+        };
+        row.appendChild(up);
+      }
+      // S469 — paste-a-link autofill (the Linktree move): a YouTube URL fills its own
+      // thumbnail (zero-API image rail) and, if the name is blank, its own title.
+      if (host === 'ckBuilding') {
+        var urlInp = row.querySelector('input[data-c="url"]');
+        var titleInp = row.querySelector('input[data-c="title"]');
+        if (urlInp) urlInp.addEventListener('change', function(){
+          var v = urlInp.value.trim();
+          var yt = v.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?[^#\s]*v=|shorts\/|embed\/|live\/))([A-Za-z0-9_-]{6,20})/);
+          if (!yt) return;
+          row.__orig = Object.assign({}, row.__orig || {}, { image: 'https://img.youtube.com/vi/'+yt[1]+'/hqdefault.jpg' });
+          if (titleInp && !titleInp.value.trim()) {
+            fetch('https://noembed.com/embed?url='+encodeURIComponent(v))
+              .then(function(r){ return r.json(); })
+              .then(function(d){ if (d && d.title && !titleInp.value.trim()) titleInp.value = d.title; })
+              .catch(function(){ /* best-effort — thumbnail already set */ });
+          }
+        });
+      }
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'rm'; rm.textContent = '×';
+      rm.onclick = function(){ row.remove(); };
+      row.appendChild(rm);
+      id(host).appendChild(row);
+    }
+    function readRows(host){
+      var out = [];
+      document.querySelectorAll('#' + host + ' .ck-row').forEach(function(row){
+        var o = Object.assign({}, row.__orig || {}), any = false;   // preserve image/kind/note on kept rows
+        row.querySelectorAll('input').forEach(function(inp){
+          var v = inp.value.trim(); o[inp.getAttribute('data-c')] = v; if (v) any = true;
+        });
+        if (any) out.push(o);
+      });
+      return out;
+    }
+    function fixUrl(o){ if (o.url && !/^https?:\/\//i.test(o.url) && o.url.charAt(0) !== '/') o.url = 'https://' + o.url; }
+
+    function save(){
+      var btn = id('ckSave'); btn.disabled = true; id('ckStatus').textContent = 'Saving…';
+      HUB.avatar_url   = id('ckAvatar').value.trim();
+      HUB.display_name = id('ckName').value.trim();
+      HUB.tagline      = id('ckTag').value.trim();
+      HUB.mission      = HUB.mission || {};
+      HUB.mission.statement = id('ckMission').value.trim(); // statement = the field /u/ actually renders; leave .goal untouched (distinct field, hub.html uses it)
+      // S469 — premiere: URL is the on/off switch (title alone renders nothing).
+      var premUrl = id('ckPremUrl').value.trim();
+      if (premUrl && !/^https?:\/\//i.test(premUrl)) premUrl = 'https://' + premUrl;
+      HUB.premiere = premUrl
+        ? { title: id('ckPremTitle').value.trim(), url: premUrl, image: (HUB.premiere && HUB.premiere.image) || '' }
+        : null;
+      HUB.sells        = readRows('ckSells');    HUB.sells.forEach(fixUrl); HUB.sells.forEach(function(s){ if(!s.kind) s.kind='product'; });
+      // S455 — loud gate BEFORE anything leaves the phone: a malformed Stripe price
+      // id would just be silently dropped server-side (invisible failure). Refuse here.
+      HUB.sells.forEach(function(s){ if (s.stripe_price_id) s.stripe_price_id = s.stripe_price_id.trim(); });
+      var badPrice = HUB.sells.filter(function(s){ return s.stripe_price_id && !/^price_[A-Za-z0-9]{8,}$/.test(s.stripe_price_id); })[0];
+      if (badPrice) {
+        id('ckStatus').textContent = 'NOT saved — the Stripe price ID on "' + (badPrice.title || 'a product') +
+          '" doesn\'t look right. It starts with "price_" — copy it from your Stripe dashboard, or leave it blank.';
+        btn.disabled = false; return;
+      }
+      HUB.building     = readRows('ckBuilding'); HUB.building.forEach(fixUrl);
+      var socObj = {};
+      readRows('ckSocials').forEach(function(r){
+        if (r.k && r.u){ var u = r.u; if (!/^https?:|^mailto:/i.test(u)) u = 'https://' + u; socObj[r.k.toLowerCase()] = u; }
+      });
+      HUB.socials = socObj;
+      fetch(API + '?action=save', {
+        method:'POST',
+        headers:{ Authorization:'Bearer ' + Auth.getAccessToken(), 'Content-Type':'application/json' },
+        body: JSON.stringify(HUB)
+      })
+      .then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }); })
+      .then(function(x){
+        // S455 Action-Reaction: "Saved" ONLY on a 200 WITH the row echoed back.
+        if (x.ok && x.d && x.d.hub){ id('ckStatus').textContent = 'Saved — your page is live.'; setTimeout(function(){ location.reload(); }, 700); }
+        else { id('ckStatus').textContent = (x.d && x.d.error) || 'Save failed — nothing was changed.'; btn.disabled = false; }
+      })
+      .catch(function(){ id('ckStatus').textContent = 'Network error — try again.'; btn.disabled = false; });
+    }
+  })();
+  </script>
+
+  <!-- S461 STORE FUNNEL — the /u/ store went dark when rendering moved off landing.html
+       (araya-track was never carried over), so no store has had a views/taps number since
+       July. page_view fires on load (handle parsed from the /u/ path); the delegated
+       listener below reports door taps + buy clicks. Counts only, no PII (track.mjs). -->
+  <script src="/components/araya-track.js"></script>
+  <script>
+  (function(){
+    'use strict';
+    document.addEventListener('click', function(e){
+      if (!window.Track || !e.target || !e.target.closest) return;
+      var buy = e.target.closest('.buybtn');
+      if (buy) {
+        Track.event('buy_click', { price: buy.getAttribute('data-price') || null });
+        return;
+      }
+      var door = e.target.closest('a.lrow, a.primary, a.tile');
+      if (door) {
+        var lbl = door.querySelector('.ll, .pt b, .tl');
+        Track.event('door_tap', {
+          door: ((lbl || door).textContent || '').trim().slice(0, 80),
+          href: (door.getAttribute('href') || '').slice(0, 200)
+        });
+      }
+    }, true); // capture: fires before navigation; sendBeacon survives unload anyway
+  })();
+  </script>
+
+  <!-- S385: the copy-paste chrome primitive — ONE line = header + dock + attractions rail + bug reporter. Identity via cr-header-* metas above. -->
+  <script src="/components/cr-frame.js" defer></script>
+  <script src="/components/ref-attach.js"></script><!-- S437: affiliate capture + storefront redirect for shared links -->
+</body>
+</html>
